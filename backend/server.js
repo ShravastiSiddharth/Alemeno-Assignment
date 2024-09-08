@@ -9,7 +9,16 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+
+// CORS configuration
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://your-frontend-production-url.com'], // add your frontend URL here
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // allow credentials like cookies
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions)); // apply the CORS middleware with options
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
